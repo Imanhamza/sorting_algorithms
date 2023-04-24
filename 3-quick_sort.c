@@ -1,7 +1,7 @@
 #include "sort.h"
 
-void quicksort(int *array, int low, int high);
-int partition(int *array, int low, int high);
+void quicksort(int *array, size_t size, int low, int high);
+int partition(int *array, size_t size, int low, int high);
 
 /**
  * quick_sort - a function that sorts an array of integers in
@@ -18,25 +18,26 @@ void quick_sort(int *array, size_t size)
 	if (array == NULL || size < 2)
 		return;
 
-	quicksort(array, 0, size - 1);
+	quicksort(array, size, 0, size - 1);
 }
 /**
  * quicksort - a function to sort the two partitions
  * @array: an array of integers
  * @low: the lowest value
  * @high: the highest value
+ * @size: size of the array
  *
  * Return: Nothing
  */
-void quicksort(int *array, int low, int high)
+void quicksort(int *array, size_t size, int low, int high)
 {
 	int pivot;
 
 	if (low < high)
 	{
-		pivot = partition(array, low, high);
-		quicksort(array, low, pivot - 1);
-		quicksort(array, pivot + 1, high);
+		pivot = partition(array, size, low, high);
+		quicksort(array, size, low, pivot - 1);
+		quicksort(array, size, pivot + 1, high);
 	}
 }
 
@@ -45,11 +46,12 @@ void quicksort(int *array, int low, int high)
  * @array: The array
  * @low: the lowest value
  * @high: the highest value
+ * @size: size of the array
  *
  * Return: the pivot number in the array
  */
 
-int partition(int *array, int low, int high)
+int partition(int *array, size_t size, int low, int high)
 {
 	int pivot = array[high];
 	int i = (low - 1);
@@ -65,10 +67,9 @@ int partition(int *array, int low, int high)
 			array[j] = tmp;
 		}
 	}
-
-	tmp = array[i +1];
+	tmp = array[i + 1];
 	array[i + 1] = array[high];
 	array[high] = tmp;
-	print_array(array, sizeof(array) + 2);
 	return (i + 1);
+	print_array(array, size);
 }
