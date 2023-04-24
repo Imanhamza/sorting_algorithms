@@ -2,7 +2,7 @@
 
 void quicksort(int *array, size_t size, int low, int high);
 int partition(int *array, size_t size, int low, int high);
-
+void swap(int *a, int *b);
 /**
  * quick_sort - a function that sorts an array of integers in
  * ascending order using the Quick sort algorithm
@@ -55,21 +55,39 @@ int partition(int *array, size_t size, int low, int high)
 {
 	int pivot = array[high];
 	int i = (low - 1);
-	int tmp, j;
+	int j;
 
 	for (j = low; j < high; j++)
 	{
-		if (array[j] <= pivot)
+		if (array[j] < pivot)
 		{
 			i++;
-			tmp = array[i];
-			array[i] = array[j];
-			array[j] = tmp;
+			if (i != j)
+			{
+				swap(&array[i], &array[j]);
+				print_array(array, size);
+			}
 		}
 	}
-	tmp = array[i + 1];
-	array[i + 1] = array[high];
-	array[high] = tmp;
+	if (array[i + 1] != array[high])
+	{
+		swap(&array[i + 1], &array[high]);
+		print_array(array, size);
+	}
+
 	return (i + 1);
-	print_array(array, size);
+}
+/**
+ * swap - a function to swap two integers
+ * @a: first int
+ * @b: second int
+ * Return: Nothing
+ */
+void swap(int *a, int *b)
+{
+	int tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
