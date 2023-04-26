@@ -40,8 +40,8 @@ void insertion_sort_list(listint_t **list)
 
 void nswap(listint_t **head, listint_t **node1, listint_t *node2)
 {
-	/*if ((*head) == NULL || (*node1) == NULL || node2 == NULL)*/
-		/*return;*/
+	if ((*head) == NULL || (*node1) == NULL || node2 == NULL)
+		return;
 	/* update the next and prev node for the second node */
 	(*node1)->next = node2->next;
 
